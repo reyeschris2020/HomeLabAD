@@ -1,10 +1,10 @@
-resumeproject
+**RESUMEPROJECT**
 
 resumeproject is an infrastructure deployment project focused on automating the setup of basic Windows Server environments for small organizations.
 
 The long-term goal is to help IT administrators, small businesses, schools, nonprofits, MSPs, and homelab users deploy repeatable Windows infrastructure using a guided workflow and declarative configuration files.
 
-Project Goal
+**Project Goal**
 
 The goal of this project is to build a tool that can help provision core Windows infrastructure such as:
 
@@ -19,8 +19,7 @@ Physical workstation domain-join support
 
 This project is currently in the early planning and proof-of-concept stage.
 
-Current Focus
-
+**Current Focus**
 The first development milestone is:
 
 resumeproject 0.1 — Foundation & Remote Connection POC
@@ -28,20 +27,16 @@ resumeproject 0.1 — Foundation & Remote Connection POC
 The purpose of this milestone is to prove that the project can connect to a Windows Server target and run basic remote PowerShell commands.
 
 Example future command:
-
 resumeproject test-connection --target 192.168.50.10
 
 Expected future output:
-
 Connecting to 192.168.50.10...
-
 Connected successfully.
-
 Hostname: DC01
 User: Administrator
-
 Target is ready for deployment.
-Planned MVP
+
+**Planned MVP**
 
 The MVP will focus on initial infrastructure deployment, not long-term endpoint management.
 
@@ -67,10 +62,9 @@ An IT administrator uses resumeproject to configure the server with Active Direc
 
 Employee workstations remain physical devices and are joined to the domain after the server infrastructure is deployed.
 
-Project Status
+**Project Status**
 
 This project is currently under active planning and early development.
-
 Current priorities:
 
 Define the project architecture.
@@ -108,5 +102,5 @@ Physical Windows workstations are supported through domain-join workflows
 Hyper-V may be supported for testing or virtualized server deployments, but the project should not be tightly coupled to Hyper-V
 License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+**This project is licensed under the MIT License. See the LICENSE file for details.**
 
