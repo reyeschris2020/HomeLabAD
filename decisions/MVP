@@ -1,178 +1,591 @@
-LabForge MVP (Version 1.0)
-Objective
+# LabForge MVP
 
-Develop a desktop application capable of automatically deploying a fully functional Windows Active Directory environment on a Hyper-V host from a declarative configuration file.
+## Project Vision
 
-The MVP focuses on deployment automation, not long-term infrastructure management.
+LabForge is an enterprise infrastructure deployment platform that helps small businesses, schools, nonprofits, MSPs, and IT consultants deploy standardized Windows Server environments with less manual configuration.
 
-Success Criteria
+The goal of LabForge is to make it easier to deploy the core infrastructure that many small organizations need:
 
-A user can launch LabForge, configure a small business environment, review the deployment plan, and automatically provision the entire environment with minimal manual intervention.
+* Active Directory
+* DNS
+* DHCP
+* File shares
+* Users and groups
+* Organizational Units
+* Group Policy
+* Workstation domain-join support
 
-Core Features
-Desktop Application
-Desktop application with a graphical user interface.
-Simple deployment wizard for creating a new environment.
-Local project management.
-Deployment progress display.
-Deployment summary after completion.
-Configuration
-GUI generates a YAML configuration file.
-YAML serves as the single source of truth.
-Configuration validation before deployment.
-Preview deployment plan before execution.
-Hyper-V Integration
-Connect to a local or remote Hyper-V host.
-Create and configure virtual switches.
-Create virtual machines.
-Configure CPU, memory, storage, and networking.
-Attach operating system installation media.
-Start virtual machines.
-Create recovery checkpoints.
-Windows Deployment
-Perform unattended Windows installation.
-Configure computer names.
-Configure networking.
-Execute bootstrap PowerShell scripts.
-Enable remote management.
-Active Directory
+LabForge is not intended to replace a full IT department. Instead, it provides a guided, repeatable, and documented deployment process for organizations that need a basic but functional Windows infrastructure.
 
-Automatically deploy:
+---
 
-One Domain Controller
-Active Directory Domain Services
-DNS
-DHCP
+## MVP Objective
 
-Automatically generate:
+The MVP will allow an IT administrator to configure and deploy a small business Windows Server environment using a desktop application.
 
-Organizational Units (OUs)
-Departments
-Security Groups
-Users
-Shared folders
-Basic Group Policies
-Client Deployment
+The administrator should be able to:
 
-Automatically deploy:
+1. Open LabForge.
+2. Create a new company deployment.
+3. Enter company and network information.
+4. Review a deployment plan.
+5. Deploy the infrastructure to a supported Windows Server target.
+6. Generate a deployment report.
+7. Join physical Windows workstations to the new domain.
 
-Two Windows client computers
-Join clients to the domain
-Apply Group Policies
-Verify successful domain membership
-File Services
+The MVP focuses on **initial infrastructure deployment**, not ongoing device management.
 
-Automatically configure:
+---
 
-Shared folders
-NTFS permissions
-Share permissions
-Deployment Engine
+## Target Users
 
-Deployment workflow:
+LabForge MVP is designed for:
 
-Read configuration
-Validate configuration
-Generate deployment plan
-Preview deployment
-Execute deployment
-Verify deployment
-Generate deployment report
-Rollback
+* Small businesses
+* Schools
+* Nonprofits
+* Managed Service Providers
+* Freelance IT consultants
+* Junior system administrators
+* Homelab users
+* Cybersecurity learners who need realistic Windows infrastructure
 
-If deployment fails:
+---
 
-Stop deployment safely
-Restore created checkpoints (when available)
-Remove partially created infrastructure where appropriate
-Generate an error report describing the failure
-Reporting
+## Primary Use Case
 
-Generate a deployment report including:
+A small business has purchased a Windows Server machine and several Windows workstations.
 
-Virtual machines created
-Domain information
-Users generated
-Groups generated
-Organizational Units
-Network configuration
-Deployment duration
-Success and failure status
-MVP Deliverable
+The IT administrator uses LabForge to configure the server as the organization’s main infrastructure server.
 
-A completed deployment should produce an environment similar to the following:
+LabForge provisions:
 
-Infrastructure
+* Active Directory
+* DNS
+* DHCP
+* Organizational Units
+* Users
+* Groups
+* File shares
+* Basic Group Policies
 
-Hyper-V Virtual Switch
-Domain Controller
-Two Windows Client Workstations
+Employee computers remain physical devices. LabForge does **not** create virtual employee desktops in the MVP. Instead, it provides a guided process for joining physical workstations to the domain.
 
-Windows Services
+---
 
-Active Directory
-DNS
-DHCP
-SMB File Sharing
+## Supported Deployment Targets
 
-Organization
+The MVP supports deployment to:
 
-Company Name
-Three Departments
-Ten Generated Users
-Security Groups
-Organizational Units
-Shared Folder Structure
+### Physical Windows Server
 
-Security
+A Windows Server installation running directly on physical hardware.
 
-Password Policy
-Windows Firewall Enabled
-Microsoft Defender Enabled
-Basic Group Policy Configuration
-Out of Scope (Post-MVP)
+### Hyper-V Virtual Machine
 
-The following features are intentionally excluded from Version 1.0:
+A Windows Server virtual machine running on a Hyper-V host.
 
-Multi-domain environments
-Multiple Domain Controllers
-Exchange Server
-Azure or Entra ID integration
-VMware support
-Proxmox support
-KVM/libvirt support
-Wazuh deployment
-SIEM deployment
-AI-powered automation
-Patch management
-Backup management
-Inventory management
-Remote endpoint management
-Software deployment
-Monitoring dashboards
-High Availability and Failover
-Definition of Done
+Hyper-V support exists for testing, development, demos, and organizations that already virtualize their server infrastructure.
 
-The MVP is considered complete when a user can:
+The core deployment engine should not be tightly coupled to Hyper-V. Hyper-V is a deployment target, not the entire product.
 
-Launch the LabForge desktop application.
-Configure a small business environment using the graphical interface.
-Generate a valid YAML configuration.
-Deploy the environment to a Hyper-V host.
-Automatically provision a working Active Directory domain.
-Automatically deploy and join two Windows clients.
-Create users, groups, Organizational Units, and shared folders.
-Produce a deployment report.
-Successfully recover from deployment failures through rollback mechanisms where supported.
-Vision Beyond Version 1.0
+---
 
-Version 1.0 establishes the deployment engine that future releases will build upon. Planned future capabilities include:
+## MVP Scope
 
-Additional virtualization providers (Proxmox, VMware, KVM/libvirt)
-Security deployment profiles
-Monitoring and health dashboards
-Endpoint lifecycle management
-Backup and disaster recovery
-Enterprise policy management
-Plugin architecture
-Cybersecurity lab deployment templates
+The MVP includes the following major areas:
+
+1. Desktop application
+2. Configuration system
+3. Deployment planning
+4. Windows Server configuration
+5. Active Directory automation
+6. DNS and DHCP configuration
+7. File share configuration
+8. Baseline Group Policy configuration
+9. Physical workstation domain-join support
+10. Deployment reporting
+11. Rollback and error handling
+
+---
+
+# Core MVP Features
+
+## 1. Desktop Application
+
+LabForge will include a desktop application with a graphical interface.
+
+The desktop app should allow the user to:
+
+* Create a new deployment
+* Open an existing deployment
+* Enter company details
+* Enter network settings
+* Select deployment target
+* Preview deployment plan
+* Start deployment
+* View deployment progress
+* View deployment results
+* Export deployment reports
+
+The GUI should be simple and wizard-based for the MVP.
+
+---
+
+## 2. Declarative Configuration
+
+LabForge will use a declarative configuration model.
+
+The GUI generates a YAML configuration file, and that YAML file becomes the source of truth for the deployment.
+
+The user describes the desired environment, and LabForge determines the steps needed to create it.
+
+Example concept:
+
+```yaml
+company:
+  name: "Acme Accounting"
+  domain: "acme.local"
+  netbios: "ACME"
+
+network:
+  subnet: "192.168.50.0/24"
+  gateway: "192.168.50.1"
+  dns: "192.168.50.10"
+
+server:
+  hostname: "DC01"
+  ip_address: "192.168.50.10"
+
+departments:
+  - Accounting
+  - HR
+  - Management
+
+users:
+  generated_count: 10
+
+features:
+  active_directory: true
+  dns: true
+  dhcp: true
+  file_shares: true
+  baseline_gpo: true
+```
+
+---
+
+## 3. Deployment Planning
+
+Before making changes, LabForge must generate a deployment plan.
+
+The plan should show:
+
+* Target server
+* Domain name
+* Network configuration
+* Roles to be installed
+* OUs to be created
+* Groups to be created
+* Users to be created
+* File shares to be created
+* Group Policies to be configured
+* Estimated deployment steps
+
+The user must review and approve the plan before deployment begins.
+
+---
+
+## 4. Windows Server Configuration
+
+LabForge will configure a Windows Server target by automating:
+
+* Hostname configuration
+* Static IP configuration
+* Remote management setup
+* Windows Firewall baseline
+* Server role installation
+* Required reboots
+* Post-reboot continuation
+
+The MVP assumes Windows Server is already installed on the target machine or VM.
+
+Full unattended Windows installation is deferred until a later version.
+
+---
+
+## 5. Active Directory Automation
+
+LabForge will automate deployment of:
+
+* Active Directory Domain Services
+* New forest creation
+* New domain creation
+* Domain Controller promotion
+* DNS integration
+
+After domain creation, LabForge will generate:
+
+* Organizational Units
+* Department OUs
+* User OUs
+* Computer OUs
+* Security groups
+* Administrative groups
+* User accounts
+
+---
+
+## 6. DNS Configuration
+
+LabForge will configure DNS for the new domain.
+
+MVP DNS tasks include:
+
+* Install DNS role if required
+* Configure domain-integrated DNS
+* Verify domain DNS resolution
+* Configure server DNS settings
+* Generate DNS validation output
+
+---
+
+## 7. DHCP Configuration
+
+LabForge will configure DHCP for the organization’s local network.
+
+MVP DHCP tasks include:
+
+* Install DHCP role
+* Create DHCP scope
+* Configure gateway option
+* Configure DNS server option
+* Configure domain name option
+* Activate DHCP scope
+* Authorize DHCP in Active Directory
+
+---
+
+## 8. Organization Structure
+
+LabForge will generate a basic company structure.
+
+Example structure:
+
+```text
+ACME
+├── Users
+│   ├── Accounting
+│   ├── HR
+│   └── Management
+├── Computers
+│   ├── Workstations
+│   └── Servers
+├── Groups
+└── Service Accounts
+```
+
+The MVP should support:
+
+* Three departments minimum
+* Ten generated users minimum
+* Department-based groups
+* Basic naming conventions
+
+---
+
+## 9. User and Group Generation
+
+LabForge will create users and groups automatically.
+
+MVP user generation includes:
+
+* First name
+* Last name
+* Username
+* Temporary password
+* Department assignment
+* Group membership
+* Account enabled status
+* Password change at next login
+
+MVP group generation includes:
+
+* Department groups
+* File share access groups
+* Basic admin group
+* Workstation users group
+
+---
+
+## 10. File Services
+
+LabForge will configure basic file sharing.
+
+MVP file services include:
+
+* Company shared folder
+* Department shared folders
+* NTFS permissions
+* SMB share permissions
+* Department-based access groups
+
+Example:
+
+```text
+\\DC01\Company
+\\DC01\Accounting
+\\DC01\HR
+\\DC01\Management
+```
+
+---
+
+## 11. Baseline Group Policy
+
+LabForge will create and link basic Group Policies.
+
+MVP baseline GPOs include:
+
+* Password policy
+* Account lockout policy
+* Windows Firewall enabled
+* Microsoft Defender enabled
+* Screen lock policy
+* Basic audit policy
+* Network drive mapping for department shares
+
+The MVP should avoid overly aggressive hardening that could break normal use.
+
+---
+
+## 12. Physical Workstation Domain Join Support
+
+LabForge will support physical workstations instead of creating virtual employee PCs.
+
+The MVP should provide:
+
+* Domain join instructions
+* Workstation naming convention
+* Recommended OU placement
+* Domain join validation checklist
+* Optional generated PowerShell script for joining a workstation to the domain
+
+Example workstation naming:
+
+```text
+ACME-WS-001
+ACME-WS-002
+ACME-WS-003
+```
+
+Example generated script concept:
+
+```powershell
+Add-Computer -DomainName "acme.local" -Restart
+```
+
+---
+
+## 13. Deployment Progress
+
+During deployment, LabForge should show progress such as:
+
+```text
+Validating configuration...
+Connecting to target server...
+Configuring hostname...
+Installing Active Directory Domain Services...
+Promoting Domain Controller...
+Configuring DNS...
+Configuring DHCP...
+Creating OUs...
+Creating groups...
+Creating users...
+Creating file shares...
+Configuring Group Policy...
+Generating report...
+Deployment complete.
+```
+
+---
+
+## 14. Deployment Report
+
+After deployment, LabForge generates a report containing:
+
+* Company name
+* Domain name
+* Server hostname
+* Server IP address
+* DHCP scope
+* DNS settings
+* OUs created
+* Groups created
+* Users created
+* File shares created
+* GPOs created
+* Deployment duration
+* Success/failure status
+* Errors and warnings
+
+Report formats for MVP:
+
+* HTML
+* JSON
+
+PDF can be added later.
+
+---
+
+## 15. Rollback and Error Handling
+
+LabForge must handle failures safely.
+
+MVP rollback behavior:
+
+* Stop deployment when a critical error occurs
+* Log the failed step
+* Preserve logs
+* Attempt to undo supported actions
+* Restore Hyper-V checkpoint if using Hyper-V and a checkpoint exists
+* Generate failure report
+
+Rollback does not need to be perfect in v1, but failures must be handled clearly and safely.
+
+---
+
+# MVP Workflow
+
+## Administrator Workflow
+
+1. Open LabForge.
+2. Click **New Deployment**.
+3. Choose deployment type:
+
+   * Physical Windows Server
+   * Hyper-V VM
+4. Enter company information:
+
+   * Company name
+   * Domain name
+   * Departments
+   * Number of users
+5. Enter network information:
+
+   * Server IP
+   * Subnet
+   * Gateway
+   * DHCP range
+6. Select features:
+
+   * Active Directory
+   * DNS
+   * DHCP
+   * File shares
+   * Baseline GPO
+7. Review generated YAML.
+8. Review deployment plan.
+9. Approve deployment.
+10. Monitor progress.
+11. View final report.
+12. Join physical workstations to the domain using LabForge instructions or generated scripts.
+
+---
+
+# Definition of Done
+
+The MVP is complete when LabForge can:
+
+* Launch as a desktop application
+* Create a new deployment project
+* Generate a valid YAML configuration
+* Validate the configuration
+* Generate a deployment plan
+* Connect to a Windows Server target
+* Configure Active Directory
+* Configure DNS
+* Configure DHCP
+* Create OUs
+* Create groups
+* Create users
+* Configure file shares
+* Configure baseline Group Policy
+* Generate domain join instructions for physical workstations
+* Generate a deployment report
+* Handle deployment errors with logs and clear reporting
+
+---
+
+# Explicitly Out of Scope for MVP
+
+The following are not included in the MVP:
+
+* Full endpoint monitoring
+* Patch management
+* Backup automation
+* Remote command execution on workstations
+* Software deployment
+* Antivirus management beyond basic Defender policy
+* SIEM integration
+* Wazuh integration
+* AI assistant
+* Microsoft Exchange
+* Microsoft 365 integration
+* Azure / Entra ID integration
+* Multi-domain forests
+* Multi-site deployments
+* High availability
+* Failover clustering
+* Print server automation
+* Inventory dashboard
+* Vulnerability scanning
+* Compliance reporting
+* Plugin marketplace
+* Automated Windows client VM deployment
+* Full unattended Windows Server installation
+
+---
+
+# Future Roadmap
+
+Future versions may include:
+
+## Version 1.1
+
+* Improved workstation onboarding
+* Print server support
+* Better GPO templates
+* Additional report formats
+
+## Version 1.2
+
+* Endpoint inventory
+* Health dashboard
+* Backup configuration
+* Patch status reporting
+
+## Version 2.0
+
+* Proxmox provider
+* VMware provider
+* KVM/libvirt provider
+* Cybersecurity lab deployment profile
+
+## Version 3.0
+
+* MSP multi-client dashboard
+* Monitoring integrations
+* Security audit scoring
+* Compliance reporting
+* Plugin system
+
+---
+
+# Summary
+
+LabForge MVP focuses on deploying the core infrastructure a small Windows-based organization needs.
+
+It does not attempt to manage every endpoint or replace an IT department. Instead, it provides a repeatable, guided, and automated way to build a functional Windows Server environment with Active Directory, DNS, DHCP, file shares, users, groups, and baseline policies.
+
+The MVP establishes the foundation for future infrastructure management, cybersecurity lab deployment, MSP tooling, and enterprise automation features.
