@@ -1,0 +1,178 @@
+LabForge MVP (Version 1.0)
+Objective
+
+Develop a desktop application capable of automatically deploying a fully functional Windows Active Directory environment on a Hyper-V host from a declarative configuration file.
+
+The MVP focuses on deployment automation, not long-term infrastructure management.
+
+Success Criteria
+
+A user can launch LabForge, configure a small business environment, review the deployment plan, and automatically provision the entire environment with minimal manual intervention.
+
+Core Features
+Desktop Application
+Desktop application with a graphical user interface.
+Simple deployment wizard for creating a new environment.
+Local project management.
+Deployment progress display.
+Deployment summary after completion.
+Configuration
+GUI generates a YAML configuration file.
+YAML serves as the single source of truth.
+Configuration validation before deployment.
+Preview deployment plan before execution.
+Hyper-V Integration
+Connect to a local or remote Hyper-V host.
+Create and configure virtual switches.
+Create virtual machines.
+Configure CPU, memory, storage, and networking.
+Attach operating system installation media.
+Start virtual machines.
+Create recovery checkpoints.
+Windows Deployment
+Perform unattended Windows installation.
+Configure computer names.
+Configure networking.
+Execute bootstrap PowerShell scripts.
+Enable remote management.
+Active Directory
+
+Automatically deploy:
+
+One Domain Controller
+Active Directory Domain Services
+DNS
+DHCP
+
+Automatically generate:
+
+Organizational Units (OUs)
+Departments
+Security Groups
+Users
+Shared folders
+Basic Group Policies
+Client Deployment
+
+Automatically deploy:
+
+Two Windows client computers
+Join clients to the domain
+Apply Group Policies
+Verify successful domain membership
+File Services
+
+Automatically configure:
+
+Shared folders
+NTFS permissions
+Share permissions
+Deployment Engine
+
+Deployment workflow:
+
+Read configuration
+Validate configuration
+Generate deployment plan
+Preview deployment
+Execute deployment
+Verify deployment
+Generate deployment report
+Rollback
+
+If deployment fails:
+
+Stop deployment safely
+Restore created checkpoints (when available)
+Remove partially created infrastructure where appropriate
+Generate an error report describing the failure
+Reporting
+
+Generate a deployment report including:
+
+Virtual machines created
+Domain information
+Users generated
+Groups generated
+Organizational Units
+Network configuration
+Deployment duration
+Success and failure status
+MVP Deliverable
+
+A completed deployment should produce an environment similar to the following:
+
+Infrastructure
+
+Hyper-V Virtual Switch
+Domain Controller
+Two Windows Client Workstations
+
+Windows Services
+
+Active Directory
+DNS
+DHCP
+SMB File Sharing
+
+Organization
+
+Company Name
+Three Departments
+Ten Generated Users
+Security Groups
+Organizational Units
+Shared Folder Structure
+
+Security
+
+Password Policy
+Windows Firewall Enabled
+Microsoft Defender Enabled
+Basic Group Policy Configuration
+Out of Scope (Post-MVP)
+
+The following features are intentionally excluded from Version 1.0:
+
+Multi-domain environments
+Multiple Domain Controllers
+Exchange Server
+Azure or Entra ID integration
+VMware support
+Proxmox support
+KVM/libvirt support
+Wazuh deployment
+SIEM deployment
+AI-powered automation
+Patch management
+Backup management
+Inventory management
+Remote endpoint management
+Software deployment
+Monitoring dashboards
+High Availability and Failover
+Definition of Done
+
+The MVP is considered complete when a user can:
+
+Launch the LabForge desktop application.
+Configure a small business environment using the graphical interface.
+Generate a valid YAML configuration.
+Deploy the environment to a Hyper-V host.
+Automatically provision a working Active Directory domain.
+Automatically deploy and join two Windows clients.
+Create users, groups, Organizational Units, and shared folders.
+Produce a deployment report.
+Successfully recover from deployment failures through rollback mechanisms where supported.
+Vision Beyond Version 1.0
+
+Version 1.0 establishes the deployment engine that future releases will build upon. Planned future capabilities include:
+
+Additional virtualization providers (Proxmox, VMware, KVM/libvirt)
+Security deployment profiles
+Monitoring and health dashboards
+Endpoint lifecycle management
+Backup and disaster recovery
+Enterprise policy management
+Plugin architecture
+Cybersecurity lab deployment templates
