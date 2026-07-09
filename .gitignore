@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+secrets/
+credentials/
+
+# Logs / generated files
+*.log
+logs/
+reports/
+output/
+
+# OS File
+.DS_Store
+Thumbs.db
